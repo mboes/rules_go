@@ -56,7 +56,10 @@ _LINKER_OPTIONS_BLACKLIST = {
 }
 
 def _filter_options(options, blacklist):
-  return [option for option in options if option not in blacklist]
+  # XXX Temporary hack to workaround
+  # https://github.com/NixOS/nixpkgs/pull/28029 not being in Nixpkgs
+  # master yet.
+  return [option for option in options if option not in blacklist] + ["-w"]
 
 def _child_name(go, path, ext, name):
   childname = mode_string(go.mode) + "/"
